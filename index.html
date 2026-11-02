@@ -1,0 +1,33 @@
+<!doctype html>
+<!--
+  Render Board: relay for "Sign in with Google" (docs/GOOGLE_SIGNIN.md).
+  Google only redirects to an https page on a real domain; the board lives on a LAN IP. This page is published
+  on GitHub Pages and set as the OAuth client's redirect URI: it forwards Google's answer (?code=...&state=...)
+  to the board at once. It stores nothing and loads nothing; the code is useless without the board's secret.
+  Change BOARD if the board's address changes.
+-->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="referrer" content="no-referrer">
+<title>Render Board sign-in</title>
+<style>
+  body { margin: 0; min-height: 100vh; display: grid; place-items: center; background: #15161a; color: #d8d9de;
+         font: 15px/1.5 system-ui, sans-serif; }
+  a { color: #8ab4ff; }
+</style>
+</head>
+<body>
+<p id="msg">Signing in to Render Board...</p>
+<script>
+  var BOARD = 'http://10.5.158.55:8000'
+  var q = window.location.search
+  if (/[?&](code|error)=/.test(q)) {
+    window.location.replace(BOARD + '/api/auth/google/callback' + q)
+  } else {
+    document.getElementById('msg').innerHTML = 'Nothing to do here. <a href="' + BOARD + '">Open Render Board</a>'
+  }
+</script>
+</body>
+</html>
