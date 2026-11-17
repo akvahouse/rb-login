@@ -23,7 +23,7 @@
 <script>
   var BOARD = 'http://10.5.158.55:8000'
   // a second board on the same host (the test board) puts `p<port>-` in front of its state
-  var PORTS = ['8020']
+  var PORTS = ['8001', '8020']
   var q = window.location.search
   var tag = /[?&]state=p(\d+)-/.exec(q)
   if (tag && PORTS.indexOf(tag[1]) >= 0) BOARD = BOARD.replace(/:\d+$/, ':' + tag[1])
